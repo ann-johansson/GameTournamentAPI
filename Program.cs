@@ -18,8 +18,17 @@ namespace GameTournamentAPI
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
+                // Exposes: /openapi/v1.json
                 app.MapOpenApi();
+
+                // Exposes Swagger UI: /swagger
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/openapi/v1.json", "My API v1");
+                    options.RoutePrefix = "swagger";
+                });
             }
+
 
             app.UseHttpsRedirection();
 
