@@ -7,6 +7,5 @@ namespace GameTournamentAPI.Services
         private readonly List<Tournament> _tournaments = new List<Tournament>();
         private int _nextId = 1;
 
-
     }
 }

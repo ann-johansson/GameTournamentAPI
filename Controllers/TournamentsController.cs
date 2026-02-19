@@ -8,4 +8,5 @@ namespace GameTournamentAPI.Controllers
     public class TournamentsController : ControllerBase
     {
     }
+
 }

@@ -1,4 +1,7 @@
 
+using GameTournamentAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace GameTournamentAPI
 {
     public class Program
@@ -6,6 +9,13 @@ namespace GameTournamentAPI
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            // Get the connection string from configuration (appsettings.json)
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            // Tell Entity Framework to use SQL Server with the provided connection string
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
             // Add services to the container.
 
