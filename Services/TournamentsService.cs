@@ -23,5 +23,23 @@ namespace GameTournamentAPI.Services
 
             return await query.ToListAsync();
         }
+
+        public async Task<Tournament?> GetByIdAsync(int id)
+        {
+            // FindAsync är super-effektiv för att leta efter just ID (Primary Key)
+            return await _context.Tournaments.FindAsync(id);
+        }
+
+        public async Task<Tournament> CreateAsync(Tournament tournament)
+        {
+            // 1. Lägg till i EF Cores "lista" (minnet)
+            _context.Tournaments.Add(tournament);
+
+            // 2. Spara ner till SQL Server på riktigt
+            // Det är här ID:t skapas av databasen!
+            await _context.SaveChangesAsync();
+
+            return tournament;
+        }
     }
 }
