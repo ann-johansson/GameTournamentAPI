@@ -50,6 +50,21 @@ namespace GameTournamentAPI.Services
             return true;
         }
 
+        public async Task<Tournament?> UpdateAsync(int id, Tournament updatedData)
+        {
+            var existing = await _context.Tournaments.FindAsync(id);
+            if (existing == null) return null;
+
+            existing.Title = updatedData.Title;
+            existing.Description = updatedData.Description;
+            existing.MaxPlayers = updatedData.MaxPlayers;
+            existing.Date = updatedData.Date;
+
+            await _context.SaveChangesAsync();
+
+            return existing;
+        }
+
 
     }
 }
