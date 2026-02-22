@@ -89,5 +89,23 @@ namespace GameTournamentAPI.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, GameUpdateDTO updateDto)
+        {
+
+            var gameModel = new Game
+            {
+                Title = updateDto.Title,
+                Time = updateDto.Time,
+                TournamentId = updateDto.TournamentId
+            };
+
+            var result = await _service.UpdateAsync(id, gameModel);
+
+            if (result == null) return NotFound();
+
+            return NoContent();
+        }
+
     }
 }

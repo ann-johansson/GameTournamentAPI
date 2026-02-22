@@ -49,5 +49,19 @@ namespace GameTournamentAPI.Services
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<Game?> UpdateAsync(int id, Game updatedData)
+        {
+            var existing = await _context.Games.FindAsync(id);
+            if (existing == null) return null;
+
+            existing.Title = updatedData.Title;
+            existing.Time = updatedData.Time;
+            existing.TournamentId = updatedData.TournamentId;
+
+            await _context.SaveChangesAsync();
+
+            return existing;
+        }
     }
 }
