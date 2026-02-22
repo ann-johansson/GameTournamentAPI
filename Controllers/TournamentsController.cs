@@ -86,5 +86,14 @@ namespace GameTournamentAPI.Controllers
             // Returnera 201 Created med en länk till den nya resursen (GetById)
             return CreatedAtAction(nameof(GetById), new { id = responseDto.Id }, responseDto);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var success = await _service.DeleteAsync(id);
+            if (!success) return NotFound();
+
+            return NoContent();
+        }
     }
 }
