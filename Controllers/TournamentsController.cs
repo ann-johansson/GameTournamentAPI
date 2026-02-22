@@ -98,7 +98,7 @@ namespace GameTournamentAPI.Controllers
         public async Task<IActionResult> Update(int id, TournamentUpdateDTO updateDto)
         {
             
-            var tournamentModel = new Tournament
+            var tournament = new Tournament
             {
                 Title = updateDto.Title,
                 Description = updateDto.Description,
@@ -106,7 +106,7 @@ namespace GameTournamentAPI.Controllers
                 Date = updateDto.Date
             };
 
-            var result = await _service.UpdateAsync(id, tournamentModel);
+            var result = await _service.UpdateAsync(id, tournament);
 
             if (result == null) return NotFound();
 

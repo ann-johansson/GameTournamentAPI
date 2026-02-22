@@ -50,15 +50,15 @@ namespace GameTournamentAPI.Services
             return true;
         }
 
-        public async Task<Tournament?> UpdateAsync(int id, Tournament updatedData)
+        public async Task<Tournament?> UpdateAsync(int id, Tournament tournament)
         {
             var existing = await _context.Tournaments.FindAsync(id);
             if (existing == null) return null;
 
-            existing.Title = updatedData.Title;
-            existing.Description = updatedData.Description;
-            existing.MaxPlayers = updatedData.MaxPlayers;
-            existing.Date = updatedData.Date;
+            existing.Title = tournament.Title;
+            existing.Description = tournament.Description;
+            existing.MaxPlayers = tournament.MaxPlayers;
+            existing.Date = tournament.Date;
 
             await _context.SaveChangesAsync();
 
