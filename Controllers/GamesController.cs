@@ -55,5 +55,39 @@ namespace GameTournamentAPI.Controllers
             return Ok(responseDto);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<GameResponseDTO>> Create(GameCreateDTO createDto)
+        {
+
+            var game = new Game
+            {
+                Title = createDto.Title,
+                Time = createDto.Time,
+                TournamentId = createDto.TournamentId
+            };
+
+
+            await _service.CreateAsync(game);
+
+
+            var responseDto = new GameResponseDTO
+            {
+                Title = game.Title,
+                Time = game.Time,
+                TournamentId = game.TournamentId
+            };
+
+            return CreatedAtAction(nameof(GetById), new { id = responseDto.Id }, responseDto);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var success = await _service.DeleteAsync(id);
+            if (!success) return NotFound();
+
+            return NoContent();
+        }
+
     }
 }
