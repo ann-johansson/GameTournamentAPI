@@ -36,17 +36,16 @@ namespace GameTournamentAPI.Controllers
         }
 
 
-        [HttpGet("{id}")] // Detta gör att URL:en blir api/tournaments/5
+        [HttpGet("{id}")]
         public async Task<ActionResult<TournamentResponseDTO>> GetById(int id)
         {
             var tournament = await _service.GetByIdAsync(id);
 
             if (tournament == null)
             {
-                return NotFound(); // Returnerar 404 om ID:t inte finns
+                return NotFound(); 
             }
 
-            // Mappa till DTO
             var responseDto = new TournamentResponseDTO
             {
                 Id = tournament.Id,
@@ -62,7 +61,7 @@ namespace GameTournamentAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<TournamentResponseDTO>> Create(TournamentCreateDTO createDto)
         {
-            // Mappa DTO -> Model
+            
             var tournament = new Tournament
             {
                 Title = createDto.Title,
@@ -71,19 +70,18 @@ namespace GameTournamentAPI.Controllers
                 Date = createDto.Date
             };
 
-            // Skicka till Service
-            var createdTournament = await _service.CreateAsync(tournament);
+           
+            await _service.CreateAsync(tournament);
 
-            // Mappa Model -> ResponseDTO
+            
             var responseDto = new TournamentResponseDTO
             {
-                Id = createdTournament.Id, // Nu har den fått ett ID från databasen!
-                Title = createdTournament.Title,
-                Description = createdTournament.Description,
-                Date = createdTournament.Date
+                Id = tournament.Id,
+                Title = tournament.Title,
+                Description = tournament.Description,
+                Date = tournament.Date
             };
 
-            // Returnera 201 Created med en länk till den nya resursen (GetById)
             return CreatedAtAction(nameof(GetById), new { id = responseDto.Id }, responseDto);
         }
 
