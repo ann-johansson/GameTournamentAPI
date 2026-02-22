@@ -30,14 +30,19 @@ namespace GameTournamentAPI.Services
 
         }
 
-        public async Task<Game> CreateAsync(Game game)
+        public async Task<bool> CreateAsync(Game game)
         {
+            var tournamentExists = await _context.Tournaments.AnyAsync(t => t.Id == game.TournamentId);
+            if (!tournamentExists)
+            {
+                return false;
+            }
 
             _context.Games.Add(game);
 
             await _context.SaveChangesAsync();
 
-            return game;
+            return true;
         }
 
         public async Task<bool> DeleteAsync(int id)

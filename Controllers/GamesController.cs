@@ -67,11 +67,16 @@ namespace GameTournamentAPI.Controllers
             };
 
 
-            await _service.CreateAsync(game);
+            var success = await _service.CreateAsync(game);
 
+            if (!success)
+            {
+                return BadRequest($"Tournament with ID {createDto.TournamentId} does not exist.");
+            }
 
             var responseDto = new GameResponseDTO
             {
+                Id = game.Id,
                 Title = game.Title,
                 Time = game.Time,
                 TournamentId = game.TournamentId
