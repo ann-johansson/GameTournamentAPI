@@ -29,7 +29,14 @@ namespace GameTournamentAPI.Controllers
                 Id = t.Id,
                 Title = t.Title,
                 Description = t.Description,
-                Date = t.Date
+                Date = t.Date,
+                Games = t.Games.Select(g => new GameResponseDTO
+                {
+                    Id = g.Id,
+                    Title = g.Title,
+                    Time = g.Time,
+                    TournamentId = g.TournamentId
+                }).ToList()
             });
 
             return Ok(response);
@@ -51,7 +58,14 @@ namespace GameTournamentAPI.Controllers
                 Id = tournament.Id,
                 Title = tournament.Title,
                 Description = tournament.Description,
-                Date = tournament.Date
+                Date = tournament.Date,
+                Games = tournament.Games.Select(g => new GameResponseDTO
+                {
+                    Id = g.Id,
+                    Title = g.Title,
+                    Time = g.Time,
+                    TournamentId = g.TournamentId
+                }).ToList()
             };
 
             return Ok(responseDto);

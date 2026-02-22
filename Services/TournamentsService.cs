@@ -14,7 +14,7 @@ namespace GameTournamentAPI.Services
 
         public async Task<IEnumerable<Tournament>> GetAllAsync(string? search)
         {
-            var query = _context.Tournaments.AsQueryable();
+            var query = _context.Tournaments.Include(t => t.Games).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(search))
             {
@@ -27,7 +27,8 @@ namespace GameTournamentAPI.Services
         public async Task<Tournament?> GetByIdAsync(int id)
         {
             
-            return await _context.Tournaments.FindAsync(id);
+            return await _context.Tournaments.Include(t => t.Games).FirstOrDefaultAsync(t => t.Id == id);
+
         }
 
         public async Task<Tournament> CreateAsync(Tournament tournament)

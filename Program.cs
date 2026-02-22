@@ -23,6 +23,7 @@ namespace GameTournamentAPI
             builder.Services.AddControllers();
 
             builder.Services.AddScoped<TournamentsService>();
+            builder.Services.AddScoped<GamesService>();
 
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();

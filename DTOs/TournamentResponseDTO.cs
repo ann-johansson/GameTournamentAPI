@@ -10,5 +10,7 @@ namespace GameTournamentAPI.DTOs
 
         public string Description { get; set; } = "";
         public DateTime Date { get; set; }
+
+        public List<GameResponseDTO> Games { get; set; } = new();
     }
 }

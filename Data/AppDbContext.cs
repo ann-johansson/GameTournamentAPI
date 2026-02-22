@@ -10,6 +10,7 @@ namespace GameTournamentAPI.Data
         {
         }
         public DbSet<Tournament> Tournaments => Set<Tournament>();
-        
+        public DbSet<Game> Games => Set<Game>();
+
     }
 }
