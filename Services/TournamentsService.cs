@@ -14,7 +14,7 @@ namespace GameTournamentAPI.Services
 
         public async Task<IEnumerable<Tournament>> GetAllAsync(string? search)
         {
-            var query = _context.Tournaments.AsQueryable();
+            var query = _context.Tournaments.Include(t => t.Games).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(search))
             {
