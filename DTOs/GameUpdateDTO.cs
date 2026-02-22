@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GameTournamentAPI.DTOs
 {
-    public class GameCreateDTO
+    public class GameUpdateDTO
     {
         [Required(ErrorMessage = "Title needs to be filled in")]
         [MinLength(3, ErrorMessage = "Title needs to be more than 3 characters long")]
@@ -13,7 +13,5 @@ namespace GameTournamentAPI.DTOs
         [FutureDate]
         public DateTime Time { get; set; }
         public int TournamentId { get; set; }
-
-
     }
 }
