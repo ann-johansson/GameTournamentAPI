@@ -34,7 +34,7 @@ namespace GameTournamentAPI.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<GameResponseDTO>> GetById(int id)
         {
             var game = await _service.GetByIdAsync(id);
@@ -85,7 +85,7 @@ namespace GameTournamentAPI.Controllers
             return CreatedAtAction(nameof(GetById), new { id = responseDto.Id }, responseDto);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var success = await _service.DeleteAsync(id);
@@ -94,7 +94,7 @@ namespace GameTournamentAPI.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, GameUpdateDTO updateDto)
         {
 
